@@ -1,4 +1,4 @@
-package com.example.entity;
+package com.user.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -49,6 +49,12 @@ public class User {
     }
 
     public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public User(long id, @NotNull String name, @NotNull String address) {
+        this.id = id;
+        this.name = name;
         this.address = address;
     }
 

@@ -1,9 +1,9 @@
-package com.example.service;
+package com.user.service;
 
 import java.util.List;
 
-import com.example.entity.User;
-import com.example.repository.UserRepository;
+import com.user.entity.User;
+import com.user.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,8 +15,8 @@ public class UserService implements IUserService {
     @Autowired
     UserRepository userRepository;
 
-    public void createUser(final User user) {
-        userRepository.save(user);
+    public User createUser(final User user) {
+        return userRepository.save(user);
     }
 
     public List<User> getUser() {
@@ -24,12 +24,16 @@ public class UserService implements IUserService {
     }
 
     public User findById(final long id) {
-        return userRepository.findById(id).orElseThrow(() -> 
-        new RuntimeException("user is not found"));
+        return userRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("user is not found"));
     }
 
-    public User update(final User user) {
-        return userRepository.save(user);
+    public User update(final User modifiedUser) {
+        User toModifyUser = userRepository.findById(modifiedUser.getId())
+            .orElseThrow(() -> new RuntimeException("user is not found"));
+        toModifyUser.setAddress(modifiedUser.getAddress());
+        toModifyUser.setName(modifiedUser.getName());
+        return userRepository.save(toModifyUser);
     }
 
     public void deleteUserById(final long id) {

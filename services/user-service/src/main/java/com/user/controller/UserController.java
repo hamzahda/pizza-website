@@ -1,9 +1,9 @@
-package com.example.controller;
+package com.user.controller;
 
 import java.util.List;
 
-import com.example.entity.User;
-import com.example.service.UserService;
+import com.user.entity.User;
+import com.user.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
