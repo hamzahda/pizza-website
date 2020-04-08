@@ -26,12 +26,12 @@ public class UserService implements IUserService {
 
     public User findById(final long id) {
         return userRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("user is not found"));
+            .orElse(null);
     }
 
     public User update(final User modifiedUser) {
         User toModifyUser = userRepository.findById(modifiedUser.getId())
-            .orElseThrow(() -> new RuntimeException("user is not found"));
+            .orElse(null);
         toModifyUser.setAddress(modifiedUser.getAddress());
         toModifyUser.setName(modifiedUser.getName());
         return userRepository.save(toModifyUser);
