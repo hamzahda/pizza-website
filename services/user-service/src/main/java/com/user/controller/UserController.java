@@ -6,7 +6,9 @@ import com.user.entity.User;
 import com.user.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,37 +25,38 @@ public class UserController {
 @Autowired
 private UserService userService;
 
-@GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-private List<User> getAll() {
-try {
-    return userService.getUser();
-} catch (final Exception e) {
+@GetMapping(value = "/")
+public ResponseEntity<List<User>> getAll() {
+    return ResponseEntity.ok(userService.getUser());   
+}
 
-}
-return null;
-    
-}
 @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-private User getUser(@PathVariable final long id ) {
-   return userService.findById(id);
+public ResponseEntity<User> getUser(@PathVariable Long id) {
+    if (!userService.checkUser(id)) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+    }
+    return ResponseEntity.ok(userService.findById(id));
 }
 
 @PostMapping("/")
-private void postUser (@RequestBody final User user){
-    userService.createUser(user);
+public ResponseEntity<User> postUser (@RequestBody final User user){
+    return ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(user));
 }
 
 @DeleteMapping("/{id}")
-private void deleteUser (@PathVariable final long id){
-    userService.deleteUserById(id);
+public ResponseEntity<String> deleteUser (@PathVariable final long id){
+    if (!userService.checkUser(id)) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+    }
+    return ResponseEntity.ok(String.format("User with ID : %d is deleted successfuly", id));
 }
 
 @PutMapping("/{id}")
-public  User modifAddr(@RequestBody final User user, @PathVariable final Long id) {
-    User usr = userService.findById(id);
-    usr.setAddress(user.getAddress());
-    userService.update(usr);
-    return usr;
+public ResponseEntity<User> modifyUser(@RequestBody final User user, @PathVariable final Long id) {
+    if (!userService.checkUser(id)) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+    }
+    return ResponseEntity.ok(userService.update(user));
   }
 
 

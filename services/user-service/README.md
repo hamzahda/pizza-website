@@ -1,4 +1,3 @@
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 # Spring Boot boilerplate
  
@@ -26,11 +25,4 @@ Or run it as an executable jar:
 
 ```sh
 $ java -jar build/libs/spring-boot-boilerplate-0.1.0.jar
-```
-
-## Testing with Curl
-
-```sh
-$ curl http://localhost:8080/hello
-{"message":"Hello, World!"}
 ```

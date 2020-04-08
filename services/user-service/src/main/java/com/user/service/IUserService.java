@@ -10,4 +10,5 @@ public interface IUserService {
     public User findById(long id);
     public User update(User user);
     public void deleteUserById(long id);
+    public boolean checkUser(long id);
 }

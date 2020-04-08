@@ -7,10 +7,8 @@ import com.user.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional
 public class UserService implements IUserService {
     @Autowired
     UserRepository userRepository;
@@ -21,6 +19,9 @@ public class UserService implements IUserService {
 
     public List<User> getUser() {
         return (List<User>) userRepository.findAll();
+    }
+    public boolean checkUser(long id){
+        return userRepository.existsById(id);
     }
 
     public User findById(final long id) {
@@ -37,7 +38,7 @@ public class UserService implements IUserService {
     }
 
     public void deleteUserById(final long id) {
-        userRepository.deleteById(id);
+       userRepository.deleteById(id);
     }
 
 }
