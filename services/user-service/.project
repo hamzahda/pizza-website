@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>Users</name>
+	<name>user-service</name>
 	<comment>Project spring-boot-boilerplate created by Buildship.</comment>
 	<projects>
 	</projects>
