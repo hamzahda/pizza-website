@@ -12,7 +12,7 @@ public class UserApp {
 
 	private static final Logger logger = LoggerFactory.getLogger(UserApp.class);
 	public static void main(String[] args) throws Exception {
-		logger.info("this is a info message");
+		logger.info("user service has started");
 		SpringApplication.run(UserApp.class, args);
 		
 	}
