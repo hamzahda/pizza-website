@@ -8,7 +8,7 @@
         </li>
         <li>
           <router-link to="/cart">
-            Cart (<span id="cart" ></span>)
+            Cart (<span id="cart" >{{ count }}</span>)
           </router-link>
         </li>
       </ul> 
@@ -20,11 +20,15 @@
 
 
 <script>
+import { mapGetters, mapActions, mapMutations } from 'vuex'; 
  export default {
   name : 'header',
   methods : {
+    ...mapMutations(['addToCart'], 'cart'),
+    ...mapActions(['test'], 'cart')
   },
   computed: {
+    ...mapGetters(['count'], 'cart'),
   }
 }
 </script>
