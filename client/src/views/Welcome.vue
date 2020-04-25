@@ -1,4 +1,4 @@
-e<template>
+<template>
   <section id="welcome">
     Enjoy our Pizza !
     <br>
