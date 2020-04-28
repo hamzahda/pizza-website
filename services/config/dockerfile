@@ -1,0 +1,5 @@
+FROM openjdk:8-jdk-alpine
+VOLUME /tmp
+ADD build/libs/config*.jar config-server.jar
+EXPOSE 8181
+CMD ["java" , "-jar" , "config-service.jar"]
